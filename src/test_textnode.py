@@ -1,5 +1,6 @@
 import unittest
-from textnode import TextNode, TextType
+
+from textnode import TextNode, TextType, text_node_to_html_node
 
 
 class TestTextNode(unittest.TestCase):
@@ -60,6 +61,57 @@ class TestTextNode(unittest.TestCase):
         node = TextNode("", TextType.TEXT)
         node2 = TextNode("", TextType.TEXT)
         self.assertEqual(node, node2)
+
+    def test_text(self):
+        node = TextNode("This is a text node", TextType.TEXT)
+        html_node = text_node_to_html_node(node)
+        self.assertEqual(html_node.tag, None)
+        self.assertEqual(html_node.value, "This is a text node")
+
+    def test_bold(self):
+        node = TextNode("bold", TextType.BOLD)
+        html_node = text_node_to_html_node(node)
+        self.assertEqual(html_node.tag, "b")
+        self.assertEqual(html_node.value, "bold")
+
+    def test_italic(self):
+        node = TextNode("italic", TextType.ITALIC)
+        html_node = text_node_to_html_node(node)
+        self.assertEqual(html_node.tag, "i")
+        self.assertEqual(html_node.value, "italic")
+
+    def test_code(self):
+        node = TextNode("code", TextType.CODE)
+        html_node = text_node_to_html_node(node)
+        self.assertEqual(html_node.tag, "code")
+        self.assertEqual(html_node.value, "code")
+
+    def test_link(self):
+        node = TextNode("click", TextType.LINK, "https://example.com")
+        html_node = text_node_to_html_node(node)
+        self.assertEqual(html_node.tag, "a")
+        self.assertEqual(html_node.value, "click")
+        self.assertEqual(html_node.props, {"href": "https://example.com"})
+
+    def test_link_requires_url(self):
+        node = TextNode("click", TextType.LINK)
+        with self.assertRaises(ValueError):
+            text_node_to_html_node(node)
+
+    def test_image(self):
+        node = TextNode("alt text", TextType.IMAGE, "https://img.com/pic.png")
+        html_node = text_node_to_html_node(node)
+        self.assertEqual(html_node.tag, "img")
+        self.assertEqual(html_node.value, "")
+        self.assertEqual(
+            html_node.props,
+            {"src": "https://img.com/pic.png", "alt": "alt text"},
+        )
+
+    def test_image_requires_url(self):
+        node = TextNode("alt text", TextType.IMAGE)
+        with self.assertRaises(ValueError):
+            text_node_to_html_node(node)
 
 
 if __name__ == "__main__":
