@@ -1,0 +1,14 @@
+{
+  "lsp": {
+    "basedpyright": {
+      "settings": {
+        "python": {
+          "analysis": {
+            "importFormat": "absolute",
+            "extraPaths": ["src"]
+          }
+        }
+      }
+    }
+  }
+}
