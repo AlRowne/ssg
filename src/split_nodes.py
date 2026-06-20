@@ -1,4 +1,3 @@
-
 from extract_markdown import extract_markdown_images, extract_markdown_links
 from textnode import TextNode, TextType
 
