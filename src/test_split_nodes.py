@@ -112,8 +112,8 @@ class TestSplitNodesDelimiter(unittest.TestCase):
             split_nodes_delimiter([node], "**", TextType.BOLD)
 
     def test_italic_delimiter(self):
-        node = TextNode("hello *italic* world", TextType.TEXT)
-        result = split_nodes_delimiter([node], "*", TextType.ITALIC)
+        node = TextNode("hello _italic_ world", TextType.TEXT)
+        result = split_nodes_delimiter([node], "_", TextType.ITALIC)
         self.assertEqual(
             result,
             [
