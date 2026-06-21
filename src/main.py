@@ -1,9 +1,16 @@
-from textnode import TextNode, TextType
+import os
+import shutil
+
+from copy_files import copy_files
 
 
 def main():
-    test = TextNode("sample text", TextType.LINK, "www.google.com")
-    print(test)
+    if os.path.exists("public/"):
+        shutil.rmtree("public/")
+    os.mkdir("public/")
+
+    copy_files("static/", "public/")
+
 
 if __name__ == "__main__":
     main()

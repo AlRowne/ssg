@@ -64,6 +64,6 @@ def markdown_to_html_node(markdown: str) -> HTMLNode:
 def text_to_children(text: str) -> list[HTMLNode]:
 
     text_nodes = text_to_textnodes(text)
-    children = [text_node_to_html_node(node) for node in text_nodes]
+    children: list[HTMLNode] = [text_node_to_html_node(node) for node in text_nodes]
 
     return children
