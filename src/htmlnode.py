@@ -14,6 +14,7 @@ class HTMLNode:
         self.children = children
         self.props = props
 
+    @override
     def __repr__(self) -> str:
         return f'HTMLNode: tag="{self.tag}", value="{self.value}", children="{self.children}", props="{self.props}"'
 
@@ -40,7 +41,7 @@ class LeafNode(HTMLNode):
         return f'LeafNode: tag="{self.tag}", value="{self.value}", props="{self.props}"'
 
     @override
-    def to_html(self):
+    def to_html(self) -> str:
         if self.value is None:
             raise ValueError
         if not self.tag:
@@ -59,7 +60,7 @@ class ParentNode(HTMLNode):
         super().__init__(tag, None, children, props)
 
     @override
-    def to_html(self):
+    def to_html(self) -> str:
         if not self.tag:
             raise ValueError("No tag")
         if not self.children:
