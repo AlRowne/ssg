@@ -1,9 +1,8 @@
-from htmlnode import HTMLNode
-from leafnode import LeafNode
+from htmlnode import HTMLNode, LeafNode, ParentNode
 from markdown_to_blocks import BlockType, block_to_block_type, markdown_to_blocks
-from parentnode import ParentNode
 from text_to_textnodes import text_to_textnodes
-from textnode import TextNode, TextType, text_node_to_html_node
+from textnode import TextNode, TextType
+from textnode_to_html import text_node_to_html_node
 
 
 def markdown_to_html_node(markdown: str) -> HTMLNode:
