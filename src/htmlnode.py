@@ -9,16 +9,16 @@ class HTMLNode:
         children: list["HTMLNode"] | None = None,
         props: dict[str, str] | None = None,
     ) -> None:
-        self.tag = tag
-        self.value = value
-        self.children = children
-        self.props = props
+        self.tag: str | None = tag
+        self.value: str | None = value
+        self.children: list["HTMLNode"] | None = children
+        self.props: dict[str, str] | None = props
 
     @override
     def __repr__(self) -> str:
         return f'HTMLNode: tag="{self.tag}", value="{self.value}", children="{self.children}", props="{self.props}"'
 
-    def to_html(self):
+    def to_html(self) -> str:
         raise NotImplementedError("to_html method must be implemented in subclasses")
 
     def props_to_html(self) -> str:

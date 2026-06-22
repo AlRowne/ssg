@@ -1,11 +1,11 @@
-from htmlnode import HTMLNode, LeafNode, ParentNode
+from htmlnode import HTMLNode, ParentNode
 from markdown_to_blocks import BlockType, block_to_block_type, markdown_to_blocks
 from text_to_textnodes import text_to_textnodes
 from textnode import TextNode, TextType
 from textnode_to_html import text_node_to_html_node
 
 
-def markdown_to_html_node(markdown: str) -> HTMLNode:
+def markdown_to_html_node(markdown: str) -> ParentNode:
 
     blocks = markdown_to_blocks(markdown)
     block_nodes: list[HTMLNode] = []
@@ -52,9 +52,6 @@ def markdown_to_html_node(markdown: str) -> HTMLNode:
                 for line in block:
                     children.append(ParentNode("li", text_to_children(line)))
                 parent = ParentNode("ol", children)
-
-            case _:
-                raise ValueError(f"{block_type} is not a defined block type")
 
         block_nodes.append(parent)
 
